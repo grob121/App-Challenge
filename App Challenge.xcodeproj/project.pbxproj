@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		F5E92FE622E0433E00C473B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FE522E0433E00C473B4 /* AppDelegate.swift */; };
-		F5E92FE822E0433E00C473B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FE722E0433E00C473B4 /* ViewController.swift */; };
 		F5E92FEB22E0433E00C473B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5E92FE922E0433E00C473B4 /* Main.storyboard */; };
 		F5E92FED22E0433F00C473B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5E92FEC22E0433F00C473B4 /* Assets.xcassets */; };
 		F5E92FF022E0433F00C473B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5E92FEE22E0433F00C473B4 /* LaunchScreen.storyboard */; };
+		F5E92FFC22E0A69100C473B4 /* StartLoanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFB22E0A69100C473B4 /* StartLoanViewController.swift */; };
+		F5E92FFE22E0B50B00C473B4 /* LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFD22E0B50B00C473B4 /* LoanApplicationViewController.swift */; };
+		F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */; };
+		F5E9300222E2149A00C473B4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F5E92FE222E0433E00C473B4 /* App Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5E92FE522E0433E00C473B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F5E92FE722E0433E00C473B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F5E92FEA22E0433E00C473B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5E92FEC22E0433F00C473B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5E92FEF22E0433F00C473B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5E92FF122E0434000C473B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5E92FFB22E0A69100C473B4 /* StartLoanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartLoanViewController.swift; sourceTree = "<group>"; };
+		F5E92FFD22E0B50B00C473B4 /* LoanApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationViewController.swift; sourceTree = "<group>"; };
+		F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLoginViewController.swift; sourceTree = "<group>"; };
+		F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +60,33 @@
 		F5E92FE422E0433E00C473B4 /* App Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				F5E92FF822E0A48400C473B4 /* View */,
+				F5E92FF722E0A44F00C473B4 /* Controller */,
 				F5E92FE522E0433E00C473B4 /* AppDelegate.swift */,
-				F5E92FE722E0433E00C473B4 /* ViewController.swift */,
-				F5E92FE922E0433E00C473B4 /* Main.storyboard */,
 				F5E92FEC22E0433F00C473B4 /* Assets.xcassets */,
 				F5E92FEE22E0433F00C473B4 /* LaunchScreen.storyboard */,
 				F5E92FF122E0434000C473B4 /* Info.plist */,
 			);
 			path = "App Challenge";
+			sourceTree = "<group>";
+		};
+		F5E92FF722E0A44F00C473B4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F5E92FFB22E0A69100C473B4 /* StartLoanViewController.swift */,
+				F5E92FFD22E0B50B00C473B4 /* LoanApplicationViewController.swift */,
+				F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */,
+				F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F5E92FF822E0A48400C473B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F5E92FE922E0433E00C473B4 /* Main.storyboard */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +160,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5E92FE822E0433E00C473B4 /* ViewController.swift in Sources */,
+				F5E9300222E2149A00C473B4 /* CreateAccountViewController.swift in Sources */,
+				F5E92FFE22E0B50B00C473B4 /* LoanApplicationViewController.swift in Sources */,
+				F5E92FFC22E0A69100C473B4 /* StartLoanViewController.swift in Sources */,
+				F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */,
 				F5E92FE622E0433E00C473B4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
