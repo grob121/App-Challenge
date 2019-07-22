@@ -15,6 +15,7 @@
 		F5E92FFE22E0B50B00C473B4 /* LoanApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFD22E0B50B00C473B4 /* LoanApplicationViewController.swift */; };
 		F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */; };
 		F5E9300222E2149A00C473B4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */; };
+		F5E9300622E5186A00C473B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300522E5186A00C473B4 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		F5E92FFD22E0B50B00C473B4 /* LoanApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanApplicationViewController.swift; sourceTree = "<group>"; };
 		F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLoginViewController.swift; sourceTree = "<group>"; };
 		F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
+		F5E9300522E5186A00C473B4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				F5E92FF822E0A48400C473B4 /* View */,
 				F5E92FF722E0A44F00C473B4 /* Controller */,
+				F5E9300322E5180800C473B4 /* Helper */,
 				F5E92FE522E0433E00C473B4 /* AppDelegate.swift */,
 				F5E92FEC22E0433F00C473B4 /* Assets.xcassets */,
 				F5E92FEE22E0433F00C473B4 /* LaunchScreen.storyboard */,
@@ -87,6 +90,14 @@
 				F5E92FE922E0433E00C473B4 /* Main.storyboard */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F5E9300322E5180800C473B4 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F5E9300522E5186A00C473B4 /* Extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E9300222E2149A00C473B4 /* CreateAccountViewController.swift in Sources */,
+				F5E9300622E5186A00C473B4 /* Extensions.swift in Sources */,
 				F5E92FFE22E0B50B00C473B4 /* LoanApplicationViewController.swift in Sources */,
 				F5E92FFC22E0A69100C473B4 /* StartLoanViewController.swift in Sources */,
 				F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */,
