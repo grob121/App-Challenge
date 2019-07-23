@@ -38,15 +38,16 @@ class MemberLoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginMember(_ sender: Any) {
         view.endEditing(true)
         
-        for member in fetchMembers()! {
-            self.member = member
-            if self.member.email == emailField.text  && self.member.password == passwordField.text {
-                performSegue(withIdentifier: "proceedLoanApplicationPage", sender: nil)
-                return
+        if(validateFields()) {
+            for member in fetchMembers()! {
+                self.member = member
+                if self.member.email == emailField.text  && self.member.password == passwordField.text {
+                    performSegue(withIdentifier: "proceedLoanApplicationPage", sender: nil)
+                    return
+                }
             }
+            showAlert(title: "Login Error", message: "Email or password is incorrect.", actions: ["OK"])
         }
-    
-        showAlert(title: "Login Error", message: "Email or password is incorrect.", actions: ["OK"])
     }
     
     @IBAction func signUpMember(_ sender: Any) {
@@ -74,11 +75,12 @@ class MemberLoginViewController: UIViewController, UITextFieldDelegate {
         passwordField.delegate = self
     }
     
-    func validateFields() {
+    func validateFields() -> Bool {
         if [emailField, passwordField].fieldsEmpty {
             showAlert(title: "Error", message: "Please complete the form to continue.", actions: ["OK"])
-            return
+            return false
         }
+        return true
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
