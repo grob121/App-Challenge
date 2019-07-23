@@ -16,6 +16,9 @@
 		F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */; };
 		F5E9300222E2149A00C473B4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */; };
 		F5E9300622E5186A00C473B4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300522E5186A00C473B4 /* Extensions.swift */; };
+		F5E9300F22E5A51200C473B4 /* App Challenge.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F5E9300D22E5A51200C473B4 /* App Challenge.xcdatamodeld */; };
+		F5E9301C22E5F6B000C473B4 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9301A22E5F6B000C473B4 /* Member.swift */; };
+		F5E9301D22E5F6B000C473B4 /* NewCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9301B22E5F6B000C473B4 /* NewCustomer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		F5E92FFF22E0B53200C473B4 /* MemberLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLoginViewController.swift; sourceTree = "<group>"; };
 		F5E9300122E2149A00C473B4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		F5E9300522E5186A00C473B4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F5E9300E22E5A51200C473B4 /* App Challenge.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "App Challenge.xcdatamodel"; sourceTree = "<group>"; };
+		F5E9301A22E5F6B000C473B4 /* Member.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		F5E9301B22E5F6B000C473B4 /* NewCustomer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCustomer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +68,8 @@
 		F5E92FE422E0433E00C473B4 /* App Challenge */ = {
 			isa = PBXGroup;
 			children = (
+				F5E9300C22E5A4C000C473B4 /* Core Data */,
+				F5E9300922E59FEE00C473B4 /* Model */,
 				F5E92FF822E0A48400C473B4 /* View */,
 				F5E92FF722E0A44F00C473B4 /* Controller */,
 				F5E9300322E5180800C473B4 /* Helper */,
@@ -98,6 +106,23 @@
 				F5E9300522E5186A00C473B4 /* Extensions.swift */,
 			);
 			path = Helper;
+			sourceTree = "<group>";
+		};
+		F5E9300922E59FEE00C473B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F5E9301A22E5F6B000C473B4 /* Member.swift */,
+				F5E9301B22E5F6B000C473B4 /* NewCustomer.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5E9300C22E5A4C000C473B4 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				F5E9300D22E5A51200C473B4 /* App Challenge.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,7 +200,10 @@
 				F5E9300622E5186A00C473B4 /* Extensions.swift in Sources */,
 				F5E92FFE22E0B50B00C473B4 /* LoanApplicationViewController.swift in Sources */,
 				F5E92FFC22E0A69100C473B4 /* StartLoanViewController.swift in Sources */,
+				F5E9301C22E5F6B000C473B4 /* Member.swift in Sources */,
 				F5E9300022E0B53200C473B4 /* MemberLoginViewController.swift in Sources */,
+				F5E9301D22E5F6B000C473B4 /* NewCustomer.swift in Sources */,
+				F5E9300F22E5A51200C473B4 /* App Challenge.xcdatamodeld in Sources */,
 				F5E92FE622E0433E00C473B4 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,6 +404,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F5E9300D22E5A51200C473B4 /* App Challenge.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F5E9300E22E5A51200C473B4 /* App Challenge.xcdatamodel */,
+			);
+			currentVersion = F5E9300E22E5A51200C473B4 /* App Challenge.xcdatamodel */;
+			path = "App Challenge.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F5E92FDA22E0433E00C473B4 /* Project object */;
 }

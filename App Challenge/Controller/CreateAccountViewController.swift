@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet var successfulCreateView: UIVisualEffectView!
     @IBOutlet weak var emailField: UITextField!
@@ -21,6 +23,11 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
     @IBOutlet weak var dateOfBirthField: UITextField!
     @IBOutlet weak var mobileNumberField: UITextField!
     
+    // MARK: - Core Data Mapped Entities
+    var member = Member()
+    var newCustomer = NewCustomer()
+    
+    // MARK: - Date Picker and Picker View Utils
     let datePicker = UIDatePicker()
     let pickerView = UIPickerView()
     var titleArray = [String]()
@@ -29,9 +36,88 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set up keyboard
         hideKeyboardWhenTappedAround()
         registerForKeyboardNotifications()
         
+        // Conform to text field delegate
+        setDelegatesForTextFields()
+    }
+    
+    // MARK: - Create Account Control and Flow
+    @IBAction func signUpMember(_ sender: Any) {
+        view.endEditing(true)
+        
+        // Validate user inputs on text fields
+        if(validateFields()) {
+            // Save user as member to Member entity
+            createNewMember()
+        }
+    }
+    
+    @IBAction func dismissCreateAccountView(_ sender: Any) {
+        view.endEditing(true)
+        
+        if [emailField, passwordField, confirmPasswordField, titleField, firstNameField, lastNameField, dateOfBirthField, mobileNumberField].fieldsWithContent {
+            dismiss(animated: true, completion: nil)
+            return
+        }
+        
+        showAlert(title: "Are you sure you want to exit?", message: "This will discard your changes.", actions: ["Cancel","OK"])
+    }
+    
+    func displaySuccesfulCreateAccountView() {
+        view.addSubview(successfulCreateView)
+        successfulCreateView.bounds = view.bounds
+        successfulCreateView.center = view.center
+        
+        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
+            self?.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: - Core Data Fetch and Save
+    func createNewMember() {
+        for member in fetchMembers()! {
+            self.member = member
+            if self.member.title == titleField.text && self.member.firstName == firstNameField.text && self.member.lastName == lastNameField.text && self.member.dateOfBirth == dateOfBirthField.text {
+                showAlert(title: "Create Account Failed", message: "This account is existing.", actions: ["OK"])
+                return
+            }
+        }
+        
+        setMemberEntityValues()
+        
+        if saveData() {
+            for newCustomer in fetchNewCustomers()! {
+                self.newCustomer = newCustomer
+                if self.newCustomer.title == titleField.text && self.newCustomer.firstName == firstNameField.text && self.newCustomer.lastName == lastNameField.text && self.newCustomer.dateOfBirth == dateOfBirthField.text {
+                    deleteNewCustomer(self.newCustomer)
+                }
+            }
+            displaySuccesfulCreateAccountView()
+        } else {
+            showAlert(title: "Loan Application Failed", message: "Please try again.", actions: ["OK"])
+            return
+        }
+    }
+    
+    func setMemberEntityValues() {
+        self.member = getMemberEntity(self.member)
+        self.member.setValue("", forKey: "requestedAmount")
+        self.member.setValue("", forKey: "duration")
+        self.member.setValue("", forKey: "loanReasons")
+        self.member.setValue(passwordField.text, forKey: "password")
+        self.member.setValue(titleField.text, forKey: "title")
+        self.member.setValue(firstNameField.text, forKey: "firstName")
+        self.member.setValue(lastNameField.text, forKey: "lastName")
+        self.member.setValue(dateOfBirthField.text, forKey: "dateOfBirth")
+        self.member.setValue(emailField.text, forKey: "email")
+        self.member.setValue(mobileNumberField.text, forKey: "mobileNumber")
+    }
+    
+    // MARK: - Text Fields and Delegates
+    func setDelegatesForTextFields() {
         emailField.delegate = self
         passwordField.delegate = self
         confirmPasswordField.delegate = self
@@ -42,48 +128,48 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         mobileNumberField.delegate = self
     }
     
-    @IBAction func signUpMember(_ sender: Any) {
-        view.endEditing(true)
-        
+    func validateFields() -> Bool {
         if [emailField, passwordField, confirmPasswordField, titleField, firstNameField, lastNameField, dateOfBirthField, mobileNumberField].fieldsEmpty {
             showAlert(title: "Error", message: "Please complete the form to continue.", actions: ["OK"])
-            return
+            return false
         }
-        
         if !(emailField.text?.isValidEmail())! {
             showAlert(title: "Error", message: "Email has invalid format.", actions: ["OK"])
-            return
+            return false
         }
-        
         if !(mobileNumberField.text?.isValidPhoneNumber())! {
             showAlert(title: "Error", message: "Mobile Number has invalid format.", actions: ["OK"])
-            return
+            return false
         }
-        
         if !(passwordField.text?.isValidPassword())! {
             showAlert(title: "Invalid Password", message: "Password must have minimum of 8 characters, at least 1 uppercase alphabet, 1 lowercase Alphabet, 1 number and 1 special character to proceed.", actions: ["OK"])
-            return
+            return false
         }
-        
         if (passwordField.text != confirmPasswordField.text) {
             showAlert(title: "Password Mismatch", message: "Make sure that Password and Confirm Password fields have the same content.", actions: ["OK"])
-            return
+            return false
         }
-        
-        view.addSubview(successfulCreateView)
-        successfulCreateView.bounds = view.bounds
-        successfulCreateView.center = view.center
-        
-        Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
-            self?.dismiss(animated: true, completion: nil)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == dateOfBirthField {
+            showDatePicker()
+        }
+        if textField == titleField {
+            showPickerView(textField)
+        }
+        if textField == mobileNumberField {
+            showDonePhonePad()
         }
     }
     
-    @IBAction func dismissCreateAccountView(_ sender: Any) {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
-        dismiss(animated: true, completion: nil)
+        return false
     }
 
+    // MARK: - Keyboard Configuration
     func registerForKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(UIKeyboardWillBeHidden(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -107,25 +193,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         scrollView.scrollIndicatorInsets = contentInsets
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == dateOfBirthField {
-            showDatePicker()
-        }
-        
-        if textField == titleField {
-            showPickerView(textField)
-        }
-        
-        if textField == mobileNumberField {
-            showDonePhonePad()
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
+    // MARK: - Date Picker Set Up
     func showDatePicker(){
         datePicker.datePickerMode = .date
         
@@ -134,8 +202,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donedatePicker));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelDatePicker));
-        
-        toolbar.setItems([doneButton,spaceButton,cancelButton], animated: false)
+        toolbar.setItems([cancelButton,spaceButton,doneButton], animated: false)
         
         dateOfBirthField.inputAccessoryView = toolbar
         dateOfBirthField.inputView = datePicker
@@ -152,6 +219,7 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         view.endEditing(true)
     }
     
+    // MARK: - Picker View Delegate and Data Source
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -178,7 +246,6 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePickerView));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelPickerView));
-        
         toolbar.setItems([cancelButton, spaceButton, doneButton], animated: false)
         
         textField.inputAccessoryView = toolbar
@@ -194,10 +261,10 @@ class CreateAccountViewController: UIViewController, UITextFieldDelegate, UIPick
         view.endEditing(true)
     }
 
+    // MARK: - Phone Pad Modification
     func showDonePhonePad(){
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
-        
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(donePhonePad));
         let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
         toolbar.setItems([spaceButton, doneButton], animated: false)
